@@ -12,6 +12,9 @@ import java.util.List;
 @Service
 public class TableroService {
 
+    @Autowired
+    TableroSyncService tableroSyncService;
+
     private final TableroRepository tableroRepository;
 
     public TableroService(TableroRepository tableroRepository) {
@@ -27,9 +30,13 @@ public class TableroService {
                 .orElseThrow(() -> new RuntimeException("Tablero no encontrado con ID: " + id));
     }
 
+
     public Tablero createTablero(Tablero tablero) {
-        return tableroRepository.save(tablero);
+        Tablero saved = tableroRepository.save(tablero);
+        tableroSyncService.syncTablero(saved);
+        return saved;
     }
+
 
     public Tablero updateTablero(Long id, Tablero tablero) {
         Tablero existingTablero = getTableroById(id);
