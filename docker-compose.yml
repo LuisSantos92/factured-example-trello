@@ -1,0 +1,36 @@
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8080"  # Puerto que expondrá el contenedor
+    depends_on:
+      - db  # Esperar a que el contenedor de la base de datos esté listo
+      - mongo
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/mydb
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: password
+    command: java -jar /app/app.jar  # Asegúrate de ejecutar el archivo JAR
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+
+  mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin  # Usuario administrador de MongoDB
+      MONGO_INITDB_ROOT_PASSWORD: administrador1  # Contraseña del usuario administrador
+      MONGO_INITDB_DATABASE: tasks  # Base de datos predeterminada
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro  # Archivo de inicialización
