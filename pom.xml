@@ -29,16 +29,7 @@
     <properties>
         <java.version>21</java.version>
     </properties>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.plugin</groupId>
-                <artifactId>spring-plugin-core</artifactId>
-                <version>1.2.0.RELEASE</version>
-                <scope>provided</scope> <!-- Esto asegura que no se compile ni ejecute -->
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
 
     <dependencies>
         <dependency>
@@ -61,19 +52,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
-        <!-- Dependencia de Springfox Swagger 2 -->
         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.9.2</version> <!-- Verifica la última versión en maven -->
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.2.0</version>
         </dependency>
 
-        <!-- Dependencia para la UI de Swagger -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.9.2</version> <!-- Verifica la última versión en maven -->
-        </dependency>
+
 
 
     </dependencies>
