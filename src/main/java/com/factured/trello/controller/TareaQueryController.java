@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/query/tareas")
@@ -15,6 +16,11 @@ public class TareaQueryController {
 
     public TareaQueryController(TareaQueryService tareaQueryService) {
         this.tareaQueryService = tareaQueryService;
+    }
+
+    @GetMapping("/report")
+    public ResponseEntity<Map<String, Object>> getReport() {
+        return ResponseEntity.ok(tareaQueryService.generateReport());
     }
 
     // Listar todas las tareas desde MongoDB
@@ -28,4 +34,5 @@ public class TareaQueryController {
     public ResponseEntity<Tarea> getTareaFromMongoById(@PathVariable String id) {
         return ResponseEntity.ok(tareaQueryService.getTareaById(id));
     }
+
 }

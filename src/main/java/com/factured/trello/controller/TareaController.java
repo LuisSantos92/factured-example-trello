@@ -53,8 +53,5 @@ public class TareaController {
         return ResponseEntity.ok(tareaService.updateEstado(id, estado));
     }
 
-    @GetMapping("/report")
-    public ResponseEntity<Map<String, Object>> getReport() {
-        return ResponseEntity.ok(tareaQueryService.generateReport());
-    }
+
 }
