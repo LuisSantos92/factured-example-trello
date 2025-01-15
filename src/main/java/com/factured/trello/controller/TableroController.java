@@ -42,4 +42,9 @@ public class TableroController {
         tableroService.deleteTablero(id);
         return ResponseEntity.noContent().build();
     }
+    @PostMapping("/bulk-generate")
+    public ResponseEntity<String> generateMassiveData(@RequestParam int count) {
+        tableroService.generateMassiveData(count);
+        return ResponseEntity.ok("Se generaron " + count + " tableros correctamente.");
+    }
 }
